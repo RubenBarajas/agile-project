@@ -1,19 +1,13 @@
 package com.rubenb.agile.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
+@Table(name = "product")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Product {
 
     @Id
@@ -21,7 +15,10 @@ public class Product {
     private UUID id;
 
     private String name;
+
     private String description;
+
     private Integer priceInCents;
+
     private Integer weightInGrams;
 }

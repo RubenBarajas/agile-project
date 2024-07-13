@@ -18,7 +18,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
     private final ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
 
     public List<ProductDto> getAllProducts() {
