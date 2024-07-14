@@ -1,21 +1,25 @@
-# Base Java 21 image
-FROM amazoncorretto:21
+# Stage 1: Build the application with Gradle
+FROM amazoncorretto:21 AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Gradle wrapper and build.gradle files
+# Copy Gradle files
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
 
-# Copy the application source code
+# Copy source code
 COPY src ./src
 
-# Run the Gradle build and tests
+# Build the application
 RUN ./gradlew clean build
 
-# Copy the built JAR file into the container
-COPY build/libs/agile-0.0.1-SNAPSHOT.jar app.jar
+# Stage 2: Create a minimal JRE image and copy the JAR file
+FROM amazoncorretto:21
+
+WORKDIR /app
+
+# Copy JAR file from the builder stage
+COPY --from=builder /app/build/libs/agile-0.0.1-SNAPSHOT.jar app.jar
 
 # Specify the command to run the application
-ENTRYPOINT ["java", "-Xmx2048M", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Xmx2048M", "-jar", "app.jar"]
