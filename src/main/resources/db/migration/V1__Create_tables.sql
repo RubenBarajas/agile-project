@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS purchase_order (
 
 CREATE TABLE IF NOT EXISTS order_item (
     id UUID PRIMARY KEY,
-    product_id UUID REFERENCES product(id),
-    order_id UUID REFERENCES purchase_order(id),
+    product_id UUID REFERENCES product(id) ON DELETE SET NULL,
+    order_id UUID REFERENCES purchase_order(id) ON DELETE CASCADE,
     quantity INTEGER,
     price_in_cents INTEGER,
     total_price_in_cents INTEGER
