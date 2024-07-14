@@ -1,0 +1,363 @@
+{
+  "info": {
+    "name": "Agile",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "POST Product",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/products",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET Products",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/products",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "PUT Product",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/products/52f72458-df45-4a52-be7c-dca350fc1148",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Soda\",\n  \"description\": \"Sweet refresher\",\n  \"priceInCents\": 1300,\n  \"weightInGrams\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "product by id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/products/20cca9ac-d6cf-40fc-8eda-8756be81d8f0",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "DELETE Product",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/products/52f72458-df45-4a52-be7c-dca350fc1148",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "OrderItem",
+      "item": [
+        {
+          "name": "OrderItem by ID",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order-items/bb61ee33-d6c5-4831-a77c-a4a413563397",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "PUT OrderItem",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order-items/f887be1f-7c64-454e-85b1-2b67e1e6326b",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": \"52f72458-df45-4a52-be7c-dca350fc1148\",\n    \"quantity\": 101,\n    \"priceInCents\": 1501,\n    \"totalPriceInCents\": 15001\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST OrderItem",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order-items",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": \"20cca9ac-d6cf-40fc-8eda-8756be81d8f0\",\n    \"quantity\": 10,\n    \"priceInCents\": 1500,\n    \"totalPriceInCents\": 15000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE OrderItem",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order-items/bb61ee33-d6c5-4831-a77c-a4a413563397",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET OrderItems",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order-items",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "GET Orders",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/orders",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "DELETE Order",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/orders/cff45807-21a3-4e9d-b09b-1b2ffdd94ef5",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Order by id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/orders/ba4f0852-642d-4273-8ee7-f0a663b932a4",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "PUT Order",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/orders/ba4f0852-642d-4273-8ee7-f0a663b932a4",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderDate\": \"2024-08-12T15:30:00\",\n  \"totalAmount\": 1501,\n  \"status\": \"NEW\",\n  \"orderItemIds\": [\n    \"06b6848e-7544-4e70-980e-356f1b9f254e\",\n    \"d4d132e7-c501-493a-a092-32be13e27d1d\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST Order",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/orders",
+              "host": [
+                "localhost"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderDate\": \"2024-07-12T15:30:00\",\n  \"totalAmount\": 1500,\n  \"status\": \"NEW\",\n  \"orderItemIds\": [\n    \"d4d132e7-c501-493a-a092-32be13e27d1d\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": []
+}

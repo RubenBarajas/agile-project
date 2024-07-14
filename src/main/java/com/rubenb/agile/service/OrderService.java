@@ -1,6 +1,8 @@
 package com.rubenb.agile.service;
 
 import com.rubenb.agile.dto.OrderDto;
+import com.rubenb.agile.exception.BadRequestException;
+import com.rubenb.agile.exception.NotFoundException;
 import com.rubenb.agile.mapper.OrderMapper;
 import com.rubenb.agile.model.Order;
 import com.rubenb.agile.model.OrderItem;
@@ -12,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,39 +29,51 @@ public class OrderService {
     private final OrderMapper mapper = Mappers.getMapper(OrderMapper.class);
 
     public List<OrderDto> getAllOrders() {
-        List<Order> existingOrders = orderRepository.findAll();
-
         return orderRepository.findAll().stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public Optional<OrderDto> getOrderById(UUID id) {
-        return orderRepository.findById(id)
-                .map(mapper::toDto);
+    public OrderDto getOrderById(UUID id) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
+        return mapper.toDto(order);
     }
 
     @Transactional
     public OrderDto createOrder(OrderDto orderDto) {
         validateOrderItemUuids(orderDto.getOrderItemIds());
+
         Order order = mapper.toEntity(orderDto);
         List<OrderItem> existingOrderItems = orderItemRepository.findAllById(orderDto.getOrderItemIds());
         order.setOrderItems(existingOrderItems);
+
         Order savedOrder = orderRepository.save(order);
         for (OrderItem existingOrderItem : existingOrderItems) {
             existingOrderItem.setOrder(savedOrder);
         }
+
         return mapper.toDto(savedOrder);
     }
 
+    @Transactional
     public OrderDto updateOrder(UUID id, OrderDto orderDto) {
         validateOrderItemUuids(orderDto.getOrderItemIds());
 
         Order existingOrder = orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
-
+                .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
         mapper.updateFromDto(orderDto, existingOrder);
+
+        List<OrderItem> existingOrderItems = orderItemRepository.findAllById(orderDto.getOrderItemIds());
+        existingOrder.getOrderItems().clear();
+        existingOrder.getOrderItems().addAll(existingOrderItems);
+
+        for (OrderItem existingOrderItem : existingOrderItems) {
+            existingOrderItem.setOrder(existingOrder);
+        }
+
         Order updatedOrder = orderRepository.save(existingOrder);
+
         return mapper.toDto(updatedOrder);
     }
 
@@ -71,7 +84,7 @@ public class OrderService {
     private void validateOrderItemUuids(List<UUID> orderItemIds) {
         for (UUID orderId : orderItemIds) {
             if (!orderItemRepository.existsById(orderId)) {
-                throw new IllegalArgumentException("Invalid OrderItem UUID: " + orderId);
+                throw new BadRequestException("Invalid OrderItem UUID: " + orderId);
             }
         }
     }

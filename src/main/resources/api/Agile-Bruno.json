@@ -1,0 +1,388 @@
+{
+  "name": "Agile",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Product",
+      "items": [
+        {
+          "type": "http",
+          "name": "POST Product",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api/v1/products",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GET Products",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api/v1/products",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "PUT Product",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/api/v1/products/52f72458-df45-4a52-be7c-dca350fc1148",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Soda\",\n  \"description\": \"Sweet refresher\",\n  \"priceInCents\": 1300,\n  \"weightInGrams\": 150\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "product by id",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api/v1/products/20cca9ac-d6cf-40fc-8eda-8756be81d8f0",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "DELETE Product",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/api/v1/products/52f72458-df45-4a52-be7c-dca350fc1148",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "OrderItem",
+      "items": [
+        {
+          "type": "http",
+          "name": "OrderItem by ID",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api/v1/order-items/bb61ee33-d6c5-4831-a77c-a4a413563397",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "PUT OrderItem",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/api/v1/order-items/f887be1f-7c64-454e-85b1-2b67e1e6326b",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"productId\": \"52f72458-df45-4a52-be7c-dca350fc1148\",\n    \"quantity\": 101,\n    \"priceInCents\": 1501,\n    \"totalPriceInCents\": 15001\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "POST OrderItem",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api/v1/order-items",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"productId\": \"20cca9ac-d6cf-40fc-8eda-8756be81d8f0\",\n    \"quantity\": 10,\n    \"priceInCents\": 1500,\n    \"totalPriceInCents\": 15000\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "DELETE OrderItem",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/api/v1/order-items/bb61ee33-d6c5-4831-a77c-a4a413563397",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Soap\",\n  \"description\": \"Nice smell\",\n  \"priceInCents\": 1999,\n  \"weightInGrams\": 50\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GET OrderItems",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api/v1/order-items",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Order",
+      "items": [
+        {
+          "type": "http",
+          "name": "GET Orders",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api/v1/orders",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "DELETE Order",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/api/v1/orders/cff45807-21a3-4e9d-b09b-1b2ffdd94ef5",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Order by id",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api/v1/orders/ba4f0852-642d-4273-8ee7-f0a663b932a4",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "PUT Order",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/api/v1/orders/ba4f0852-642d-4273-8ee7-f0a663b932a4",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"orderDate\": \"2024-08-12T15:30:00\",\n  \"totalAmount\": 1501,\n  \"status\": \"NEW\",\n  \"orderItemIds\": [\n    \"06b6848e-7544-4e70-980e-356f1b9f254e\",\n    \"d4d132e7-c501-493a-a092-32be13e27d1d\"\n  ]\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "POST Order",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api/v1/orders",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"orderDate\": \"2024-07-12T15:30:00\",\n  \"totalAmount\": 1500,\n  \"status\": \"NEW\",\n  \"orderItemIds\": [\n    \"d4d132e7-c501-493a-a092-32be13e27d1d\"\n  ]\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "Agile",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}

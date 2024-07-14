@@ -1,18 +1,17 @@
 package com.rubenb.agile.service;
 
 import com.rubenb.agile.dto.OrderItemDto;
+import com.rubenb.agile.exception.NotFoundException;
 import com.rubenb.agile.mapper.OrderItemMapper;
 import com.rubenb.agile.model.OrderItem;
 import com.rubenb.agile.model.Product;
 import com.rubenb.agile.repository.OrderItemRepository;
 import com.rubenb.agile.repository.ProductRepository;
-import jakarta.transaction.Transactional;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -33,36 +32,34 @@ public class OrderItemService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
-    public Optional<OrderItemDto> getOrderItemById(UUID id) {
-        return orderItemRepository.findById(id)
-                .map(mapper::toDto);
+    public OrderItemDto getOrderItemById(UUID id) {
+        OrderItem orderItem = orderItemRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Order item not found with id: " + id));
+        return mapper.toDto(orderItem);
     }
 
     public OrderItemDto createOrderItem(OrderItemDto orderItemDto) {
         OrderItem orderItem = mapper.toEntity(orderItemDto);
 
         Product product = productRepository.findById(orderItemDto.getProductId())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new NotFoundException("Product not found with id: " + orderItemDto.getProductId()));
         orderItem.setProduct(product);
 
         OrderItem savedOrderItem = orderItemRepository.save(orderItem);
-
         return mapper.toDto(savedOrderItem);
     }
 
     public OrderItemDto updateOrderItem(UUID id, OrderItemDto orderItemDto) {
         OrderItem existingOrderItem = orderItemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order item not found"));
+                .orElseThrow(() ->new NotFoundException("Order item not found with id: " + orderItemDto.getProductId()));
 
         mapper.updateFromDto(orderItemDto, existingOrderItem);
 
         if (orderItemDto.getProductId() != existingOrderItem.getProduct().getId()) {
             Product product = productRepository.findById(orderItemDto.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
+                    .orElseThrow(() -> new NotFoundException("Product not found with id: " + orderItemDto));
             existingOrderItem.setProduct(product);
         }
-
         return mapper.toDto(orderItemRepository.save(existingOrderItem));
     }
 

@@ -1,6 +1,7 @@
 package com.rubenb.agile.service;
 
 import com.rubenb.agile.dto.ProductDto;
+import com.rubenb.agile.exception.NotFoundException;
 import com.rubenb.agile.mapper.ProductMapper;
 import com.rubenb.agile.model.Product;
 import com.rubenb.agile.repository.ProductRepository;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,9 +26,10 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ProductDto> getProductById(UUID id) {
-        return productRepository.findById(id)
-                .map(mapper::toDto);
+    public ProductDto getProductById(UUID id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
+        return mapper.toDto(product);
     }
 
     public ProductDto createProduct(ProductDto productDto) {
@@ -38,10 +39,8 @@ public class ProductService {
 
     public ProductDto updateProduct(UUID id, ProductDto productDetails) {
         Product existingProduct = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-
+                .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
         mapper.updateFromDto(productDetails, existingProduct);
-
         return mapper.toDto(productRepository.save(existingProduct));
     }
 
