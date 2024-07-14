@@ -10,6 +10,8 @@ import com.rubenb.agile.repository.OrderItemRepository;
 import com.rubenb.agile.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.mapstruct.factory.Mappers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +29,17 @@ public class OrderService {
     private OrderItemRepository orderItemRepository;
 
     private final OrderMapper mapper = Mappers.getMapper(OrderMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     public List<OrderDto> getAllOrders() {
+        logger.debug("Getting all orders");
         return orderRepository.findAll().stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 
     public OrderDto getOrderById(UUID id) {
+        logger.debug("Getting order with ID: {}", id);
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
         return mapper.toDto(order);
@@ -42,6 +47,7 @@ public class OrderService {
 
     @Transactional
     public OrderDto createOrder(OrderDto orderDto) {
+        logger.debug("Creating order with data: {}", orderDto);
         validateOrderItemUuids(orderDto.getOrderItemIds());
 
         Order order = mapper.toEntity(orderDto);
@@ -58,6 +64,7 @@ public class OrderService {
 
     @Transactional
     public OrderDto updateOrder(UUID id, OrderDto orderDto) {
+        logger.debug("Updating order with ID: {}", id);
         validateOrderItemUuids(orderDto.getOrderItemIds());
 
         Order existingOrder = orderRepository.findById(id)
@@ -78,6 +85,7 @@ public class OrderService {
     }
 
     public void deleteOrder(UUID id) {
+        logger.debug("Deleting order with ID: {}", id);
         orderRepository.deleteById(id);
     }
 
